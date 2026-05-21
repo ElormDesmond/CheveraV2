@@ -1,0 +1,45 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: chevera_v2_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: chevera_admin
+      POSTGRES_PASSWORD: obsidian_amber_2026
+      POSTGRES_DB: chevera_v2
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_v2_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U chevera_admin -d chevera_v2"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./backend-api
+    container_name: chevera_v2_backend
+    restart: unless-stopped
+    ports:
+      - "8081:8080"
+    environment:
+      DB_URL: postgres://chevera_admin:obsidian_amber_2026@db:5432/chevera_v2?sslmode=disable
+      JWT_SECRET: chevera_v2_ultra_secret_masterpiece
+    depends_on:
+      db:
+        condition: service_healthy
+
+  web:
+    build: ./web-client
+    container_name: chevera_v2_web
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_URL: http://localhost:8081/api
+    depends_on:
+      - backend
+
+volumes:
+  postgres_v2_data:
