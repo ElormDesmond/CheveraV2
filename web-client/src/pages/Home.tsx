@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 const Home = () => {
   const containerRef = useRef(null);
   const [showDigiModal, setShowDigiModal] = useState(false);
+  const [selectedFlyer, setSelectedFlyer] = useState<string | null>(null);
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -105,13 +106,13 @@ const Home = () => {
         </div>
       </section>
 
-      {/* 2. THE STUDIO HUB (THE SWITCHER) */}
+      {/* 2. OUR SERVICES (FORMERLY HUB) */}
       <section className="py-32 px-8 bg-obsidian-light/30 border-y border-white/5 relative">
         <div className="max-w-[1800px] mx-auto">
           <div className="mb-20">
-             <h4 className="text-amber font-black text-xs uppercase tracking-[0.5em] mb-4">Studio Hub</h4>
+             <h4 className="text-amber font-black text-xs uppercase tracking-[0.5em] mb-4">The Pillars</h4>
              <h2 className="text-5xl md:text-8xl text-white font-display font-black tracking-tighter uppercase leading-none">
-                SELECT YOUR <br /><span className="text-amber italic">DESTINATION</span>.
+                OUR <br /><span className="text-amber italic">SERVICES</span>.
              </h2>
           </div>
 
@@ -124,7 +125,7 @@ const Home = () => {
                cat="01 — Build"
              />
              <HubCard 
-               title="Global Logistics" 
+               title="Travel / Tour" 
                desc="Curators of international travel, placements, and seamless journeys." 
                img="/images/travel_tour_assets/tour.jpg" 
                path="/logistics"
@@ -148,26 +149,28 @@ const Home = () => {
                <h4 className="text-amber font-black text-xs uppercase tracking-[0.4em] mb-4">Portfolio Highlight</h4>
                <h2 className="text-5xl md:text-7xl text-white font-display font-black uppercase tracking-tighter">RECENT <span className="text-amber italic">WORKS</span>.</h2>
             </div>
-            <Link to="/portfolio" className="btn-amber">View All Exhibits</Link>
+            <Link to="/services" className="btn-amber">View All Exhibits</Link>
          </div>
          
          <div className="grid md:grid-cols-2 gap-8">
-            <div className="relative h-[600px] rounded-[3rem] overflow-hidden group cursor-pointer">
+            <Link to="/services" className="relative h-[600px] rounded-[3rem] overflow-hidden group cursor-pointer">
                <img src="/images/steaman/Steaman 3d 1.jpg" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" alt="Steaman" />
                <div className="absolute inset-0 bg-gradient-to-t from-obsidian to-transparent opacity-60" />
                <div className="absolute bottom-12 left-12">
                   <p className="text-amber font-black text-xs uppercase tracking-widest mb-2">Residential — 2023</p>
-                  <h3 className="text-4xl text-white uppercase font-display font-black">Steaman Project</h3>
+                  <h3 className="text-4xl text-white uppercase font-display font-black mb-4">Steaman Project</h3>
+                  <div className="inline-flex items-center gap-2 text-amber font-black text-[10px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Learn More <ArrowRight size={14} /></div>
                </div>
-            </div>
-            <div className="relative h-[600px] rounded-[3rem] overflow-hidden group cursor-pointer">
+            </Link>
+            <Link to="/services" className="relative h-[600px] rounded-[3rem] overflow-hidden group cursor-pointer">
                <img src="/images/darkuman/dakuman_1.jpg" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" alt="Darkuman" />
                <div className="absolute inset-0 bg-gradient-to-t from-obsidian to-transparent opacity-60" />
                <div className="absolute bottom-12 left-12">
                   <p className="text-amber font-black text-xs uppercase tracking-widest mb-2">Interior — 2024</p>
-                  <h3 className="text-4xl text-white uppercase font-display font-black">Darkuman Residence</h3>
+                  <h3 className="text-4xl text-white uppercase font-display font-black mb-4">Darkuman Residence</h3>
+                  <div className="inline-flex items-center gap-2 text-amber font-black text-[10px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Learn More <ArrowRight size={14} /></div>
                </div>
-            </div>
+            </Link>
          </div>
       </section>
 
@@ -181,33 +184,27 @@ const Home = () => {
                  Stay updated with the latest studio developments, seasonal promotions, and detailed service orientations.
               </p>
            </div>
-           <div className="flex gap-4">
-              <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-ash/20">
-                 <ArrowRight size={20} className="rotate-180" />
-              </div>
-              <div className="w-12 h-12 rounded-full border border-amber/50 flex items-center justify-center text-amber">
-                 <ArrowRight size={20} />
-              </div>
-           </div>
         </div>
 
         {/* Infinite Slider Wrapper */}
-        <div className="flex gap-8 px-8 overflow-hidden">
+        <div className="flex gap-8 px-8 overflow-hidden group/slider">
            <motion.div 
              animate={{ x: [0, -1600] }}
              transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
              className="flex gap-8 whitespace-nowrap"
+             whileHover={{ animationPlayState: 'paused' }}
            >
               {[...flyers, ...flyers].map((img, idx) => (
                 <div 
                   key={idx} 
+                  onClick={() => setSelectedFlyer(img)}
                   className="w-[400px] h-[550px] rounded-[2rem] bg-obsidian-light border border-white/5 flex flex-col items-center justify-center relative group cursor-pointer overflow-hidden flex-shrink-0 shadow-2xl"
                 >
                    <img src={img} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000" alt={`Flyer ${idx}`} />
                    <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent opacity-60" />
                    
                    <div className="absolute bottom-10 left-10 right-10 flex justify-between items-center opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0">
-                      <span className="text-white font-black uppercase tracking-widest text-xs">Full Orientation</span>
+                      <span className="text-white font-black uppercase tracking-widest text-[10px]">Full Orientation</span>
                       <ArrowRight className="text-amber" size={20} />
                    </div>
                 </div>
@@ -231,51 +228,45 @@ const Home = () => {
               exit={{ scale: 0.9, y: 20 }}
               className="bg-obsidian-light border border-white/10 p-12 rounded-[3rem] max-w-lg w-full relative overflow-hidden"
             >
-               {/* Modal ambient light */}
                <div className="absolute -top-24 -right-24 w-64 h-64 bg-amber/10 blur-[100px] rounded-full" />
-               
-               <button 
-                 onClick={() => setShowDigiModal(false)}
-                 className="absolute top-6 right-6 text-ash/20 hover:text-white transition-colors z-10"
-               >
-                  <X size={24} />
-               </button>
-               
-               <div className="w-16 h-16 bg-amber rounded-2xl flex items-center justify-center text-obsidian mb-8 shadow-[0_0_30px_rgba(252,165,3,0.3)]">
-                  <PenTool size={32} />
-               </div>
-               
+               <button onClick={() => setShowDigiModal(false)} className="absolute top-6 right-6 text-ash/20 hover:text-white transition-colors z-10"><X size={24} /></button>
+               <div className="w-16 h-16 bg-amber rounded-2xl flex items-center justify-center text-obsidian mb-8 shadow-[0_0_30px_rgba(252,165,3,0.3)]"><PenTool size={32} /></div>
                <h3 className="text-4xl text-white mb-2 uppercase font-display font-black tracking-tighter">DigiPress Hub</h3>
                <p className="text-amber font-black text-[10px] uppercase tracking-[0.4em] mb-8">Digital Design & High-Precision Prints</p>
-               
-               <p className="text-ash/60 mb-8 leading-relaxed">
-                  We provide a comprehensive suite of digital services designed for professional impact and uncompromising quality:
-               </p>
-               
                <ul className="space-y-4 mb-10">
-                  {[
-                    'Professional Logo Designing',
-                    'High-Volume Mass Printing',
-                    'Business Card Design & Print',
-                    'Online Form Applications',
-                    'Custom Picture Framing'
-                  ].map(service => (
-                    <li key={service} className="flex items-center gap-3 text-white font-bold text-sm">
-                       <div className="w-1.5 h-1.5 rounded-full bg-amber" />
-                       {service}
-                    </li>
+                  {['Logo Designing', 'Mass Printing', 'Business Cards', 'Online Forms', 'Picture Framing'].map(service => (
+                    <li key={service} className="flex items-center gap-3 text-white font-bold text-sm"><div className="w-1.5 h-1.5 rounded-full bg-amber" />{service}</li>
                   ))}
                </ul>
-
-               <a 
-                 href="https://wa.me/233541428690" 
-                 target="_blank" 
-                 rel="noopener noreferrer"
-                 className="btn-amber w-full flex items-center justify-center gap-3"
-               >
-                  Contact Us Now <MessageCircle size={18} />
-               </a>
+               <a href="https://wa.me/233541428690" target="_blank" rel="noopener noreferrer" className="btn-amber w-full flex items-center justify-center gap-3">Contact Us Now <MessageCircle size={18} /></a>
             </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Flyer Modal */}
+      <AnimatePresence>
+        {selectedFlyer && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedFlyer(null)}
+            className="fixed inset-0 z-[1001] flex items-center justify-center p-4 md:p-12 bg-obsidian/95 backdrop-blur-3xl cursor-zoom-out"
+          >
+             <button className="absolute top-8 right-8 text-white/20 hover:text-amber transition-colors"><X size={48} /></button>
+             <motion.img 
+               initial={{ scale: 0.9 }}
+               animate={{ scale: 1 }}
+               exit={{ scale: 0.9 }}
+               src={selectedFlyer} 
+               className="max-h-full max-w-full object-contain rounded-2xl shadow-2xl border border-white/5" 
+               alt="Flyer Full"
+               onClick={(e) => e.stopPropagation()}
+             />
+             <div className="absolute bottom-8 left-1/2 -translate-x-1/2 bg-amber text-obsidian px-8 py-3 rounded-full font-black uppercase tracking-widest text-[10px]">
+                Full Orientation Mode
+             </div>
           </motion.div>
         )}
       </AnimatePresence>
