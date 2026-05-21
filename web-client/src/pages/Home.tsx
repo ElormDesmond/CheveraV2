@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { ArrowRight, MoveDown, ShieldCheck, PenTool, Layout, Box, X, MessageCircle } from 'lucide-react';
+import { ArrowRight, MoveDown, ShieldCheck, PenTool, X, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
@@ -105,137 +105,73 @@ const Home = () => {
         </div>
       </section>
 
-      {/* 2. FEATURED PROJECTS */}
+      {/* 2. THE STUDIO HUB (THE SWITCHER) */}
       <section className="py-32 px-8 bg-obsidian-light/30 border-y border-white/5 relative">
         <div className="max-w-[1800px] mx-auto">
-          <div className="grid lg:grid-cols-2 gap-24 items-center">
-            <div>
-              <h4 className="text-amber font-black text-xs uppercase tracking-[0.4em] mb-6">Featured Projects</h4>
-              <h2 className="text-5xl md:text-7xl text-white mb-12 uppercase font-display">SAMPLE 3D <br /><span className="text-amber italic">DESIGN PROJECTS</span>.</h2>
-              <p className="text-ash/40 text-lg leading-relaxed mb-12 max-w-xl">
-                Explore a curated selection of our finest architectural and engineering masterpieces. From residential villas to commercial hubs, we bring photorealistic precision to every vision.
-              </p>
-              <div className="grid sm:grid-cols-2 gap-8">
-                 <MethodCard icon={<PenTool className="text-amber" />} title="Steaman Project" desc="Bespoke architectural excellence." />
-                 <MethodCard icon={<Layout className="text-amber" />} title="Darkuman" desc="Luxury interior curations." />
-                 <MethodCard icon={<Box className="text-amber" />} title="Apartment Complex" desc="Premium materials and structural soul." />
-                 <Link to="/portfolio" className="p-8 rounded-amber border border-dashed border-white/10 flex flex-col justify-center items-center text-center group cursor-pointer hover:border-amber/40 transition-colors">
-                    <p className="text-ash/20 font-black uppercase tracking-widest text-[10px]">Explore All</p>
-                    <ArrowRight className="text-ash/20 group-hover:text-amber transition-colors mt-2" />
-                 </Link>
-              </div>
-            </div>
-            
-            <div className="relative">
-               <div className="aspect-square rounded-[4rem] overflow-hidden rotate-3 hover:rotate-0 transition-transform duration-1000 shadow-2xl">
-                  <img src="/images/h4.jpg" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000" alt="Process" />
-               </div>
-               <div className="absolute -bottom-12 -left-12 w-48 h-48 bg-amber rounded-full flex items-center justify-center text-obsidian font-black text-center rotate-12 shadow-2xl">
-                  <div>
-                    <span className="block text-4xl leading-none italic">100%</span>
-                    <span className="text-[10px] uppercase tracking-widest leading-tight block mt-1">Customer <br />Expectations</span>
-                  </div>
-               </div>
-            </div>
+          <div className="mb-20">
+             <h4 className="text-amber font-black text-xs uppercase tracking-[0.5em] mb-4">Studio Hub</h4>
+             <h2 className="text-5xl md:text-8xl text-white font-display font-black tracking-tighter uppercase leading-none">
+                SELECT YOUR <br /><span className="text-amber italic">DESTINATION</span>.
+             </h2>
+          </div>
+
+          <div className="grid lg:grid-cols-3 gap-8">
+             <HubCard 
+               title="Architectural Studio" 
+               desc="Excellence in master planning, structural soul, and 3D precision." 
+               img="/images/h1.jpg" 
+               path="/services"
+               cat="01 — Build"
+             />
+             <HubCard 
+               title="Global Logistics" 
+               desc="Curators of international travel, placements, and seamless journeys." 
+               img="/images/travel_tour_assets/tour.jpg" 
+               path="/logistics"
+               cat="02 — Explore"
+             />
+             <HubCard 
+               title="DigiPress Hub" 
+               desc="Sharp digital branding and high-precision print protocols." 
+               img="/images/ppp.jpg" 
+               path="/digital"
+               cat="03 — Identity"
+             />
           </div>
         </div>
       </section>
 
-      {/* 3. OUR SERVICES */}
-      <section className="py-32 px-8 relative overflow-hidden">
-        {/* Ambient background image for section */}
-        <div className="absolute inset-0 z-0 opacity-10 pointer-events-none">
-           <img src="/images/constructionimage1.jpg" className="w-full h-full object-cover grayscale brightness-50" alt="Construction Bg" />
-        </div>
-
-        <div className="max-w-[1800px] mx-auto text-center mb-24 relative z-10">
-          <h2 className="text-6xl md:text-9xl text-white tracking-tighter uppercase font-display">OUR <span className="text-amber italic underline decoration-amber/10">SERVICES</span></h2>
-          <p className="text-ash/40 mt-6 text-xl uppercase font-black tracking-widest">Precision. Integrity. Innovation. — Your vision, our mission.</p>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-8 relative z-10">
-           {[
-             { name: 'Architectural / Civil Engineering', cat: 'Master Planning', img: '/images/constructionimage1.jpg', path: '/services' },
-             { name: 'Building Materials', cat: 'Premium Sourcing', img: '/images/bm.jpg', path: '/services' },
-             { name: 'DigiPress Hub', cat: 'Branding & Prints', img: '/images/ppp.jpg', isModal: true }
-           ].map((item, i) => (
-             <motion.div 
-               key={i}
-               whileHover={{ y: -20 }}
-               className="group relative h-[600px] rounded-amber overflow-hidden bg-obsidian-light border border-white/5"
-             >
-                <img src={item.img} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-all duration-700 group-hover:scale-110" alt={item.name} />
-                <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent" />
-                <div className="absolute bottom-12 left-12 text-left">
-                   <p className="text-amber font-black text-xs uppercase tracking-[0.3em] mb-2">{item.cat}</p>
-                   <h3 className="text-4xl text-white group-hover:italic transition-all uppercase leading-none tracking-tighter">{item.name}</h3>
-                   
-                   {item.isModal ? (
-                      <button 
-                        onClick={() => setShowDigiModal(true)}
-                        className="inline-flex items-center gap-2 text-white/40 font-black text-[10px] uppercase tracking-widest mt-8 group-hover:text-amber transition-colors"
-                      >
-                        Learn More <ArrowRight size={14} />
-                      </button>
-                   ) : (
-                      <Link to={item.path || '/services'} className="inline-flex items-center gap-2 text-white/40 font-black text-[10px] uppercase tracking-widest mt-8 group-hover:text-amber transition-colors">
-                        Learn More <ArrowRight size={14} />
-                      </Link>
-                   )}
-                </div>
-             </motion.div>
-           ))}
-        </div>
+      {/* 3. FEATURED EXHIBITS PREVIEW */}
+      <section className="py-32 px-8">
+         <div className="max-w-[1800px] mx-auto flex flex-col md:flex-row justify-between items-end gap-8 mb-20">
+            <div>
+               <h4 className="text-amber font-black text-xs uppercase tracking-[0.4em] mb-4">Portfolio Highlight</h4>
+               <h2 className="text-5xl md:text-7xl text-white font-display font-black uppercase tracking-tighter">RECENT <span className="text-amber italic">WORKS</span>.</h2>
+            </div>
+            <Link to="/portfolio" className="btn-amber">View All Exhibits</Link>
+         </div>
+         
+         <div className="grid md:grid-cols-2 gap-8">
+            <div className="relative h-[600px] rounded-[3rem] overflow-hidden group cursor-pointer">
+               <img src="/images/steaman/Steaman 3d 1.jpg" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" alt="Steaman" />
+               <div className="absolute inset-0 bg-gradient-to-t from-obsidian to-transparent opacity-60" />
+               <div className="absolute bottom-12 left-12">
+                  <p className="text-amber font-black text-xs uppercase tracking-widest mb-2">Residential — 2023</p>
+                  <h3 className="text-4xl text-white uppercase font-display font-black">Steaman Project</h3>
+               </div>
+            </div>
+            <div className="relative h-[600px] rounded-[3rem] overflow-hidden group cursor-pointer">
+               <img src="/images/darkuman/dakuman_1.jpg" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" alt="Darkuman" />
+               <div className="absolute inset-0 bg-gradient-to-t from-obsidian to-transparent opacity-60" />
+               <div className="absolute bottom-12 left-12">
+                  <p className="text-amber font-black text-xs uppercase tracking-widest mb-2">Interior — 2024</p>
+                  <h3 className="text-4xl text-white uppercase font-display font-black">Darkuman Residence</h3>
+               </div>
+            </div>
+         </div>
       </section>
 
-      {/* 4. TRAVEL & TOUR */}
-      <section className="py-32 px-8 bg-obsidian-light/20 border-t border-white/5">
-        <div className="max-w-[1800px] mx-auto grid lg:grid-cols-2 gap-24 items-center">
-           <div className="relative order-2 lg:order-1">
-              <div className="aspect-video rounded-[3rem] overflow-hidden shadow-2xl relative group">
-                 <img src="/images/travel_tour_assets/tour.jpg" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000" alt="Travel and Tour" />
-                 <div className="absolute inset-0 bg-amber/10 mix-blend-overlay" />
-                 <div className="absolute top-8 left-8 bg-white text-obsidian px-6 py-2 rounded-full font-black text-xs uppercase tracking-widest">Global Logistics</div>
-              </div>
-              <div className="absolute -bottom-8 -right-8 glass-card p-8 flex items-center gap-6">
-                 <div className="w-12 h-12 bg-amber rounded-full flex items-center justify-center text-obsidian"><Box size={24} /></div>
-                 <div>
-                    <p className="text-white font-black uppercase text-xs tracking-widest">New Deal</p>
-                    <p className="text-ash/60 text-sm">Scholarships Available</p>
-                 </div>
-              </div>
-           </div>
-
-           <div className="order-1 lg:order-2 space-y-8">
-              <h4 className="text-amber font-black text-xs uppercase tracking-[0.4em]">CheVera Logistics</h4>
-              <h2 className="text-5xl md:text-8xl text-white tracking-tighter leading-none font-display uppercase">TRAVEL AND TOUR <br /><span className="text-amber italic">UPDATES AND DEALS</span>.</h2>
-              <p className="text-ash/40 text-xl leading-relaxed max-w-xl">
-                 Stay updated with the latest travel news, exclusive deals, and curated itineraries for memorable adventures. Discover new destinations and book with confidence.
-              </p>
-              
-              <div className="grid sm:grid-cols-2 gap-4">
-                 {[
-                   'Flight Booking', 
-                   'Visa Applications', 
-                   'DV Lottery Application', 
-                   'International Scholarships', 
-                   'International Work Deals'
-                 ].map(item => (
-                   <div key={item} className="flex items-center gap-3 text-ash/60 font-bold hover:text-white transition-colors cursor-default">
-                      <div className="w-1.5 h-1.5 rounded-full bg-amber" />
-                      {item}
-                   </div>
-                 ))}
-              </div>
-
-              <div className="pt-8">
-                 <button className="nav-link !text-amber !text-sm">Learn More <ArrowRight size={14} className="inline ml-2" /></button>
-              </div>
-           </div>
-        </div>
-      </section>
-
-      {/* 5. NEWS & UPDATES (CAROUSEL SECTION) */}
+      {/* 4. NEWS & UPDATES */}
       <section className="py-32 border-t border-white/5 bg-obsidian overflow-hidden">
         <div className="max-w-[1800px] mx-auto px-8 mb-16 flex flex-col md:flex-row justify-between items-end gap-8">
            <div className="max-w-2xl">
@@ -347,14 +283,19 @@ const Home = () => {
   );
 };
 
-const MethodCard = ({ icon, title, desc }: { icon: React.ReactNode, title: string, desc: string }) => (
-  <div className="p-8 rounded-amber bg-obsidian-light border border-white/5 hover:border-amber/20 transition-all duration-500 group">
-    <div className="w-12 h-12 bg-amber/5 rounded-xl flex items-center justify-center mb-6 group-hover:bg-amber group-hover:text-obsidian transition-all">
-      {icon}
+const HubCard = ({ title, desc, img, path, cat }: { title: string, desc: string, img: string, path: string, cat: string }) => (
+  <Link to={path} className="group relative h-[700px] rounded-[3rem] overflow-hidden bg-obsidian-light border border-white/5">
+    <img src={img} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-110" alt={title} />
+    <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent opacity-80" />
+    <div className="absolute bottom-12 left-12 right-12">
+       <p className="text-amber font-black text-[10px] uppercase tracking-[0.5em] mb-4">{cat}</p>
+       <h3 className="text-4xl text-white uppercase font-display font-black mb-6 leading-none tracking-tighter">{title}</h3>
+       <p className="text-ash/40 text-sm mb-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500 max-w-xs">{desc}</p>
+       <div className="w-14 h-14 rounded-full bg-white text-obsidian flex items-center justify-center translate-y-10 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+          <ArrowRight size={24} />
+       </div>
     </div>
-    <h4 className="text-white text-xl mb-2 uppercase tracking-tighter font-display font-black">{title}</h4>
-    <p className="text-ash/40 text-sm leading-relaxed">{desc}</p>
-  </div>
+  </Link>
 );
 
 export default Home;

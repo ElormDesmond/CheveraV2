@@ -44,10 +44,11 @@ const Footer = () => {
           <div className="lg:col-span-2 space-y-8">
             <h4 className="text-amber font-black text-xs uppercase tracking-[0.3em]">Quicklinks</h4>
             <ul className="space-y-4">
-              <FooterLink to="/contact" label="Contact" />
               <FooterLink to="/services" label="Our Services" />
-              <FooterLink to="/portfolio" label="Portfolio" />
-              <FooterLink to="#" label="Travel and Tour" />
+              <FooterLink to="/logistics" label="Logistics" />
+              <FooterLink to="/digital" label="DigiPress" />
+              <FooterLink to="/portfolio" label="Exhibits" />
+              <FooterLink to="/contact" label="Connect" />
             </ul>
           </div>
 

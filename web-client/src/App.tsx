@@ -11,6 +11,8 @@ import ScrollToTop from './components/layout/ScrollToTop';
 import Home from './pages/Home';
 import Services from './pages/Services';
 import Portfolio from './pages/Portfolio';
+import Logistics from './pages/Logistics';
+import Digital from './pages/Digital';
 import Contact from './pages/Contact';
 import Admin from './pages/Admin';
 
@@ -39,8 +41,9 @@ function App() {
           <Route element={<PublicLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/services" element={<Services />} />
-            <Route path="/store" element={<Services />} />
             <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/logistics" element={<Logistics />} />
+            <Route path="/digital" element={<Digital />} />
             <Route path="/contact" element={<Contact />} />
           </Route>
         </Routes>
