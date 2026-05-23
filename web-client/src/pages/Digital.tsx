@@ -79,7 +79,7 @@ const Digital = () => {
          <h2 className="text-5xl md:text-8xl text-white mb-12 uppercase tracking-tighter font-display leading-none">
             READY TO <span className="text-amber italic">BRAND?</span>
          </h2>
-         <a href="https://wa.me/233541428690" target="_blank" rel="noopener noreferrer" className="btn-amber px-16 text-lg">Connect With Design Hub</a>
+         <a href="https://wa.me/233541428690" target="_blank" rel="noopener noreferrer" className="btn-amber px-16 text-lg">Connect With Us</a>
       </section>
     </div>
   );

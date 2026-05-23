@@ -34,6 +34,11 @@ const Home = () => {
         <div className="absolute inset-0 z-0 opacity-30">
           <div className="absolute inset-0 bg-gradient-to-b from-obsidian via-transparent to-obsidian z-10" />
           <motion.img 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.3 }}
+            transition={{ duration: 1.5 }}
+            loading="eager"
+            decoding="async"
             style={{ y: y1 }}
             src="/images/archtecturalimage2.jpg" 
             className="w-full h-[120%] object-cover grayscale contrast-125"
@@ -91,11 +96,17 @@ const Home = () => {
                style={{ y: y2 }}
                className="w-full aspect-[3/4] rounded-amber overflow-hidden border-8 border-obsidian shadow-2xl relative"
              >
-                <img src="/images/darkuman/dakuman_1.jpg" className="w-full h-full object-cover" alt="Featured Project" />
+                <img 
+                  src="/images/darkuman/dakuman_1.jpg" 
+                  loading="eager"
+                  decoding="async"
+                  className="w-full h-full object-cover" 
+                  alt="Featured Project" 
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-obsidian to-transparent opacity-60" />
                 <div className="absolute bottom-8 left-8 right-8">
                    <p className="text-amber font-black text-[10px] uppercase tracking-widest mb-2">Exhibit 01</p>
-                   <h3 className="text-2xl text-white uppercase tracking-tighter">The Darkuman Residence</h3>
+                   <h3 className="text-2xl text-white uppercase tracking-tighter font-display">The Darkuman Residence</h3>
                 </div>
              </motion.div>
              <div className="mt-12 flex items-center gap-4 text-ash/20">
@@ -106,7 +117,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* 2. OUR SERVICES (FORMERLY HUB) */}
+      {/* 2. THE STUDIO HUB */}
       <section className="py-32 px-8 bg-obsidian-light/30 border-y border-white/5 relative">
         <div className="max-w-[1800px] mx-auto">
           <div className="mb-20">
@@ -154,7 +165,13 @@ const Home = () => {
          
          <div className="grid md:grid-cols-2 gap-8">
             <Link to="/services" className="relative h-[600px] rounded-[3rem] overflow-hidden group cursor-pointer">
-               <img src="/images/steaman/Steaman 3d 1.jpg" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" alt="Steaman" />
+               <img 
+                src="/images/steaman/Steaman 3d 1.jpg" 
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" 
+                alt="Steaman" 
+               />
                <div className="absolute inset-0 bg-gradient-to-t from-obsidian to-transparent opacity-60" />
                <div className="absolute bottom-12 left-12">
                   <p className="text-amber font-black text-xs uppercase tracking-widest mb-2">Residential — 2023</p>
@@ -163,7 +180,13 @@ const Home = () => {
                </div>
             </Link>
             <Link to="/services" className="relative h-[600px] rounded-[3rem] overflow-hidden group cursor-pointer">
-               <img src="/images/darkuman/dakuman_1.jpg" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" alt="Darkuman" />
+               <img 
+                src="/images/darkuman/dakuman_1.jpg" 
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" 
+                alt="Darkuman" 
+               />
                <div className="absolute inset-0 bg-gradient-to-t from-obsidian to-transparent opacity-60" />
                <div className="absolute bottom-12 left-12">
                   <p className="text-amber font-black text-xs uppercase tracking-widest mb-2">Interior — 2024</p>
@@ -200,7 +223,13 @@ const Home = () => {
                   onClick={() => setSelectedFlyer(img)}
                   className="w-[400px] h-[550px] rounded-[2rem] bg-obsidian-light border border-white/5 flex flex-col items-center justify-center relative group cursor-pointer overflow-hidden flex-shrink-0 shadow-2xl"
                 >
-                   <img src={img} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000" alt={`Flyer ${idx}`} />
+                   <img 
+                    src={img} 
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000" 
+                    alt={`Flyer ${idx}`} 
+                   />
                    <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent opacity-60" />
                    
                    <div className="absolute bottom-10 left-10 right-10 flex justify-between items-center opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0">
@@ -274,12 +303,17 @@ const Home = () => {
   );
 };
 
-const HubCard = ({ title, desc, img, path, cat }: { title: string, desc: string, img: string, path: string, cat: string }) => (
+const HubCard = ({ title, desc, img, path }: { title: string, desc: string, img: string, path: string, cat: string }) => (
   <Link to={path} className="group relative h-[700px] rounded-[3rem] overflow-hidden bg-obsidian-light border border-white/5">
-    <img src={img} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-110" alt={title} />
+    <img 
+      src={img} 
+      loading="lazy"
+      decoding="async"
+      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-110" 
+      alt={title} 
+    />
     <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent opacity-80" />
     <div className="absolute bottom-12 left-12 right-12">
-       <p className="text-amber font-black text-[10px] uppercase tracking-[0.5em] mb-4">{cat}</p>
        <h3 className="text-4xl text-white uppercase font-display font-black mb-6 leading-none tracking-tighter">{title}</h3>
        <p className="text-ash/40 text-sm mb-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500 max-w-xs">{desc}</p>
        <div className="w-14 h-14 rounded-full bg-white text-obsidian flex items-center justify-center translate-y-10 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">

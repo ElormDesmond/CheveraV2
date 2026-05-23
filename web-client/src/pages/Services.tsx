@@ -28,6 +28,14 @@ const architectureServices = [
     desc: "We supply premium, imported building materials that define the longevity of your project. From weather-resistant roofing to high-pigment artisan paints, our vault is curated for quality.",
     features: ["Imported Zinc Roofing", "Aluminum Sheets", "Matte & Gloss Paints", "Structural Adhesives"],
     img: "/images/bm.jpg"
+  },
+  {
+    icon: <Box size={48} />,
+    title: "Interior & Exterior Design",
+    tagline: "Atmosphere by design, logic by engineering.",
+    desc: "We curate environments that resonate with your lifestyle. From photorealistic interior modeling to expansive landscape and exterior concepts, we define the soul of your space.",
+    features: ["Bespoke Interior Modeling", "Landscape Architecture", "Lighting & Texture Design", "Functional Spatial Planning"],
+    img: "/images/interiordesign3.jpeg"
   }
 ];
 
@@ -90,7 +98,7 @@ const Services = () => {
               </div>
               <div className={`lg:col-span-6 ${idx % 2 !== 0 ? 'lg:order-1' : ''}`}>
                  <motion.div whileInView={{ scale: [0.95, 1], opacity: [0, 1] }} viewport={{ once: true }} transition={{ duration: 1.2 }} className="aspect-square lg:aspect-video rounded-[3rem] overflow-hidden relative group">
-                    <img src={service.img} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" alt={service.title} />
+                    <img src={service.img} loading="lazy" decoding="async" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" alt={service.title} />
                     <div className="absolute inset-0 bg-amber mix-blend-multiply opacity-10 group-hover:opacity-0 transition-opacity duration-1000" />
                  </motion.div>
               </div>
@@ -115,14 +123,14 @@ const Services = () => {
                 onClick={() => setSelectedProject(project)}
                 className="group relative w-[450px] md:w-[700px] h-[600px] overflow-hidden rounded-amber bg-obsidian-light shadow-2xl cursor-pointer"
               >
-                <img src={project.thumbnail_url} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" alt={project.title} />
+                <img src={project.thumbnail_url} loading="lazy" decoding="async" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" alt={project.title} />
                 <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent opacity-80" />
                 <div className="absolute bottom-12 left-12 right-12 flex justify-between items-end">
                    <div>
                       <p className="text-amber font-black text-xs uppercase tracking-widest mb-2">{project.category} — {project.completion_year}</p>
                       <h3 className="text-4xl text-white uppercase tracking-tighter font-display">{project.title}</h3>
                    </div>
-                   <div className="w-16 h-16 rounded-full bg-white text-obsidian flex items-center justify-center translate-y-20 group-hover:translate-y-0 transition-transform duration-500 hover:bg-amber"><ArrowUpRight size={24} /></div>
+                   <div className="w-16 h-16 rounded-full bg-white text-obsidian flex items-center justify-center translate-y-20 group-hover:translate-y-0 transition-transform duration-500 hover:bg-amber shadow-2xl"><ArrowUpRight size={24} /></div>
                 </div>
               </div>
             ))}
@@ -133,7 +141,7 @@ const Services = () => {
       {/* 4. UPCOMING ROADMAP */}
       <section className="py-32 px-8 border-t border-white/5 relative overflow-hidden text-center">
         <div className="absolute inset-0 z-0">
-           <img src="/images/constructionimage3.jpg" className="w-full h-full object-cover opacity-25 grayscale brightness-75 contrast-125" alt="Bg" />
+           <img src="/images/constructionimage3.jpg" loading="lazy" decoding="async" className="w-full h-full object-cover opacity-25 grayscale brightness-75 contrast-125" alt="Bg" />
            <div className="absolute inset-0 bg-obsidian/40" />
         </div>
         <div className="relative z-10 max-w-[1800px] mx-auto">
@@ -175,7 +183,7 @@ const ProjectModal = ({ project, onClose }: { project: any, onClose: () => void 
   const prevImg = (e: any) => { e.stopPropagation(); setCurrentIdx((prev) => (prev - 1 + project.images.length) % project.images.length); };
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} className="fixed inset-0 z-[1000] bg-obsidian/95 backdrop-blur-2xl flex flex-col p-8 md:p-16 overflow-y-auto">
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} className="fixed inset-0 z-[1001] bg-obsidian/95 backdrop-blur-2xl flex flex-col p-8 md:p-16 overflow-y-auto">
       <div className="max-w-[1800px] mx-auto w-full flex flex-col h-full">
         <div className="flex justify-between items-start mb-12">
           <div>
@@ -187,14 +195,14 @@ const ProjectModal = ({ project, onClose }: { project: any, onClose: () => void 
         <div className="flex-grow flex items-center justify-center relative min-h-[400px]">
           <button onClick={prevImg} className="absolute left-0 z-10 w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-amber hover:text-obsidian transition-all"><ChevronLeft size={32} /></button>
           <AnimatePresence mode="wait">
-            <motion.img key={currentIdx} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.5 }} src={project.images[currentIdx]} className="max-h-[60vh] md:max-h-[70vh] w-auto object-contain rounded-2xl shadow-2xl border border-white/5" alt="Slide" onClick={(e) => e.stopPropagation()} />
+            <motion.img key={currentIdx} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.5 }} src={project.images[currentIdx]} loading="eager" decoding="async" className="max-h-[60vh] md:max-h-[70vh] w-auto object-contain rounded-2xl shadow-2xl border border-white/5" alt="Slide" onClick={(e) => e.stopPropagation()} />
           </AnimatePresence>
           <button onClick={nextImg} className="absolute right-0 z-10 w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-amber hover:text-obsidian transition-all"><ChevronRight size={32} /></button>
         </div>
         <div className="mt-12 flex flex-col items-center gap-8">
            <div className="flex gap-4 overflow-x-auto pb-4 max-w-full no-scrollbar">
               {project.images.map((img: string, i: number) => (
-                <button key={i} onClick={(e) => { e.stopPropagation(); setCurrentIdx(i); }} className={`w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 transition-all duration-500 border-2 ${currentIdx === i ? 'border-amber scale-110' : 'border-transparent opacity-40'}`}><img src={img} className="w-full h-full object-cover" alt="Thumb" /></button>
+                <button key={i} onClick={(e) => { e.stopPropagation(); setCurrentIdx(i); }} className={`w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 transition-all duration-500 border-2 ${currentIdx === i ? 'border-amber scale-110 shadow-xl' : 'border-transparent opacity-40'}`}><img src={img} className="w-full h-full object-cover" alt="Thumb" /></button>
               ))}
            </div>
         </div>
